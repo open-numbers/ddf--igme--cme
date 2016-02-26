@@ -1,0 +1,6 @@
+,concept,name,type
+0,iso_code,ISO Code,string
+1,countryname,CountryName,string
+2,uncertainty_bounds,Uncertainty bounds*,string
+0,country,Country,entity_domain
+0,year,Year,time
