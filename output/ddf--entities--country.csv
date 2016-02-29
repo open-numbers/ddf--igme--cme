@@ -1,196 +1,196 @@
-country,iso_code,countryname
-afg,AFG,Afghanistan
-ago,AGO,Angola
-alb,ALB,Albania
-and,AND,Andorra
-are,ARE,United Arab Emirates
-arg,ARG,Argentina
-arm,ARM,Armenia
-atg,ATG,Antigua & Barbuda
-aus,AUS,Australia
-aut,AUT,Austria
-aze,AZE,Azerbaijan
-bdi,BDI,Burundi
-bel,BEL,Belgium
-ben,BEN,Benin
-bfa,BFA,Burkina Faso
-bgd,BGD,Bangladesh
-bgr,BGR,Bulgaria
-bhr,BHR,Bahrain
-bhs,BHS,Bahamas
-bih,BIH,Bosnia & Herzegovina
-blr,BLR,Belarus
-blz,BLZ,Belize
-bol,BOL,Bolivia
-bra,BRA,Brazil
-brb,BRB,Barbados
-brn,BRN,Brunei
-btn,BTN,Bhutan
-bwa,BWA,Botswana
-caf,CAF,Central African Republic
-can,CAN,Canada
-che,CHE,Switzerland
-chl,CHL,Chile
-chn,CHN,China
-civ,CIV,Cote d Ivoire
-cmr,CMR,Cameroon
-cod,COD,Congo DR
-cog,COG,Congo
-cok,COK,Cook Islands
-col,COL,Colombia
-com,COM,Comoros
-cpv,CPV,Cape Verde
-cri,CRI,Costa Rica
-cub,CUB,Cuba
-cyp,CYP,Cyprus
-cze,CZE,Czech Republic
-deu,DEU,Germany
-dji,DJI,Djibouti
-dma,DMA,Dominica
-dnk,DNK,Denmark
-dom,DOM,Dominican Republic
-dza,DZA,Algeria
-ecu,ECU,Ecuador
-egy,EGY,Egypt
-eri,ERI,Eritrea
-esp,ESP,Spain
-est,EST,Estonia
-eth,ETH,Ethiopia
-fin,FIN,Finland
-fji,FJI,Fiji
-fra,FRA,France
-fsm,FSM,Federated States of Micronesia
-gab,GAB,Gabon
-gbr,GBR,United Kingdom
-geo,GEO,Georgia
-gha,GHA,Ghana
-gin,GIN,Guinea
-gmb,GMB,Gambia The
-gnb,GNB,Guinea-Bissau
-gnq,GNQ,Equatorial Guinea
-grc,GRC,Greece
-grd,GRD,Grenada
-gtm,GTM,Guatemala
-guy,GUY,Guyana
-hnd,HND,Honduras
-hrv,HRV,Croatia
-hti,HTI,Haiti
-hun,HUN,Hungary
-idn,IDN,Indonesia
-ind,IND,India
-irl,IRL,Ireland
-irn,IRN,Iran
-irq,IRQ,Iraq
-isl,ISL,Iceland
-isr,ISR,Israel
-ita,ITA,Italy
-jam,JAM,Jamaica
-jor,JOR,Jordan
-jpn,JPN,Japan
-kaz,KAZ,Kazakhstan
-ken,KEN,Kenya
-kgz,KGZ,Kyrgyzstan
-khm,KHM,Cambodia
-kir,KIR,Kiribati
-kna,KNA,Saint Kitts & Nevis
-kor,KOR,Korea Rep
-kwt,KWT,Kuwait
-lao,LAO,Lao PDR
-lbn,LBN,Lebanon
-lbr,LBR,Liberia
-lby,LBY,Libya
-lca,LCA,Saint Lucia
-lka,LKA,Sri Lanka
-lso,LSO,Lesotho
-ltu,LTU,Lithuania
-lux,LUX,Luxembourg
-lva,LVA,Latvia
-mar,MAR,Morocco
-mco,MCO,Monaco
-mda,MDA,Moldova
-mdg,MDG,Madagascar
-mdv,MDV,Maldives
-mex,MEX,Mexico
-mhl,MHL,Marshall Islands
-mkd,MKD,Macedonia
-mli,MLI,Mali
-mlt,MLT,Malta
-mmr,MMR,Myanmar
-mne,MNE,Montenegro
-mng,MNG,Mongolia
-moz,MOZ,Mozambique
-mrt,MRT,Mauritania
-mus,MUS,Mauritius
-mwi,MWI,Malawi
-mys,MYS,Malaysia
-nam,NAM,Namibia
-ner,NER,Niger
-nga,NGA,Nigeria
-nic,NIC,Nicaragua
-niu,NIU,Niue
-nld,NLD,Netherlands
-nor,NOR,Norway
-npl,NPL,Nepal
-nru,NRU,Nauru
-nzl,NZL,New Zealand
-omn,OMN,Oman
-pak,PAK,Pakistan
-pan,PAN,Panama
-per,PER,Peru
-phl,PHL,Philippines
-plw,PLW,Palau
-png,PNG,Papua New Guinea
-pol,POL,Poland
-prk,PRK,Korea DPR
-prt,PRT,Portugal
-pry,PRY,Paraguay
-pse,PSE,State of Palestine
-qat,QAT,Qatar
-rou,ROU,Romania
-rus,RUS,Russian Federation
-rwa,RWA,Rwanda
-sau,SAU,Saudi Arabia
-sdn,SDN,Sudan
-sen,SEN,Senegal
-sgp,SGP,Singapore
-slb,SLB,Solomon Islands
-sle,SLE,Sierra Leone
-slv,SLV,El Salvador
-smr,SMR,San Marino
-som,SOM,Somalia
-srb,SRB,Serbia
-ssd,SSD,South Sudan
-stp,STP,Sao Tome & Principe
-sur,SUR,Suriname
-svk,SVK,Slovakia
-svn,SVN,Slovenia
-swe,SWE,Sweden
-swz,SWZ,Swaziland
-syc,SYC,Seychelles
-syr,SYR,Syria
-tcd,TCD,Chad
-tgo,TGO,Togo
-tha,THA,Thailand
-tjk,TJK,Tajikistan
-tkm,TKM,Turkmenistan
-tls,TLS,Timor Leste
-ton,TON,Tonga
-tto,TTO,Trinidad & Tobago
-tun,TUN,Tunisia
-tur,TUR,Turkey
-tuv,TUV,Tuvalu
-tza,TZA,Tanzania
-uga,UGA,Uganda
-ukr,UKR,Ukraine
-ury,URY,Uruguay
-usa,USA,United States of America
-uzb,UZB,Uzbekistan
-vct,VCT,St Vincent & the Grenadines
-ven,VEN,Venezuela
-vnm,VNM,Vietnam
-vut,VUT,Vanuatu
-wsm,WSM,Samoa
-yem,YEM,Yemen
-zaf,ZAF,South Africa
-zmb,ZMB,Zambia
-zwe,ZWE,Zimbabwe
+country,countryname,iso_code
+afg,Afghanistan,AFG
+ago,Angola,AGO
+alb,Albania,ALB
+and,Andorra,AND
+are,United Arab Emirates,ARE
+arg,Argentina,ARG
+arm,Armenia,ARM
+atg,Antigua & Barbuda,ATG
+aus,Australia,AUS
+aut,Austria,AUT
+aze,Azerbaijan,AZE
+bdi,Burundi,BDI
+bel,Belgium,BEL
+ben,Benin,BEN
+bfa,Burkina Faso,BFA
+bgd,Bangladesh,BGD
+bgr,Bulgaria,BGR
+bhr,Bahrain,BHR
+bhs,Bahamas,BHS
+bih,Bosnia & Herzegovina,BIH
+blr,Belarus,BLR
+blz,Belize,BLZ
+bol,Bolivia,BOL
+bra,Brazil,BRA
+brb,Barbados,BRB
+brn,Brunei,BRN
+btn,Bhutan,BTN
+bwa,Botswana,BWA
+caf,Central African Republic,CAF
+can,Canada,CAN
+che,Switzerland,CHE
+chl,Chile,CHL
+chn,China,CHN
+civ,Cote d Ivoire,CIV
+cmr,Cameroon,CMR
+cod,Congo DR,COD
+cog,Congo,COG
+cok,Cook Islands,COK
+col,Colombia,COL
+com,Comoros,COM
+cpv,Cape Verde,CPV
+cri,Costa Rica,CRI
+cub,Cuba,CUB
+cyp,Cyprus,CYP
+cze,Czech Republic,CZE
+deu,Germany,DEU
+dji,Djibouti,DJI
+dma,Dominica,DMA
+dnk,Denmark,DNK
+dom,Dominican Republic,DOM
+dza,Algeria,DZA
+ecu,Ecuador,ECU
+egy,Egypt,EGY
+eri,Eritrea,ERI
+esp,Spain,ESP
+est,Estonia,EST
+eth,Ethiopia,ETH
+fin,Finland,FIN
+fji,Fiji,FJI
+fra,France,FRA
+fsm,Federated States of Micronesia,FSM
+gab,Gabon,GAB
+gbr,United Kingdom,GBR
+geo,Georgia,GEO
+gha,Ghana,GHA
+gin,Guinea,GIN
+gmb,Gambia The,GMB
+gnb,Guinea-Bissau,GNB
+gnq,Equatorial Guinea,GNQ
+grc,Greece,GRC
+grd,Grenada,GRD
+gtm,Guatemala,GTM
+guy,Guyana,GUY
+hnd,Honduras,HND
+hrv,Croatia,HRV
+hti,Haiti,HTI
+hun,Hungary,HUN
+idn,Indonesia,IDN
+ind,India,IND
+irl,Ireland,IRL
+irn,Iran,IRN
+irq,Iraq,IRQ
+isl,Iceland,ISL
+isr,Israel,ISR
+ita,Italy,ITA
+jam,Jamaica,JAM
+jor,Jordan,JOR
+jpn,Japan,JPN
+kaz,Kazakhstan,KAZ
+ken,Kenya,KEN
+kgz,Kyrgyzstan,KGZ
+khm,Cambodia,KHM
+kir,Kiribati,KIR
+kna,Saint Kitts & Nevis,KNA
+kor,Korea Rep,KOR
+kwt,Kuwait,KWT
+lao,Lao PDR,LAO
+lbn,Lebanon,LBN
+lbr,Liberia,LBR
+lby,Libya,LBY
+lca,Saint Lucia,LCA
+lka,Sri Lanka,LKA
+lso,Lesotho,LSO
+ltu,Lithuania,LTU
+lux,Luxembourg,LUX
+lva,Latvia,LVA
+mar,Morocco,MAR
+mco,Monaco,MCO
+mda,Moldova,MDA
+mdg,Madagascar,MDG
+mdv,Maldives,MDV
+mex,Mexico,MEX
+mhl,Marshall Islands,MHL
+mkd,Macedonia,MKD
+mli,Mali,MLI
+mlt,Malta,MLT
+mmr,Myanmar,MMR
+mne,Montenegro,MNE
+mng,Mongolia,MNG
+moz,Mozambique,MOZ
+mrt,Mauritania,MRT
+mus,Mauritius,MUS
+mwi,Malawi,MWI
+mys,Malaysia,MYS
+nam,Namibia,NAM
+ner,Niger,NER
+nga,Nigeria,NGA
+nic,Nicaragua,NIC
+niu,Niue,NIU
+nld,Netherlands,NLD
+nor,Norway,NOR
+npl,Nepal,NPL
+nru,Nauru,NRU
+nzl,New Zealand,NZL
+omn,Oman,OMN
+pak,Pakistan,PAK
+pan,Panama,PAN
+per,Peru,PER
+phl,Philippines,PHL
+plw,Palau,PLW
+png,Papua New Guinea,PNG
+pol,Poland,POL
+prk,Korea DPR,PRK
+prt,Portugal,PRT
+pry,Paraguay,PRY
+pse,State of Palestine,PSE
+qat,Qatar,QAT
+rou,Romania,ROU
+rus,Russian Federation,RUS
+rwa,Rwanda,RWA
+sau,Saudi Arabia,SAU
+sdn,Sudan,SDN
+sen,Senegal,SEN
+sgp,Singapore,SGP
+slb,Solomon Islands,SLB
+sle,Sierra Leone,SLE
+slv,El Salvador,SLV
+smr,San Marino,SMR
+som,Somalia,SOM
+srb,Serbia,SRB
+ssd,South Sudan,SSD
+stp,Sao Tome & Principe,STP
+sur,Suriname,SUR
+svk,Slovakia,SVK
+svn,Slovenia,SVN
+swe,Sweden,SWE
+swz,Swaziland,SWZ
+syc,Seychelles,SYC
+syr,Syria,SYR
+tcd,Chad,TCD
+tgo,Togo,TGO
+tha,Thailand,THA
+tjk,Tajikistan,TJK
+tkm,Turkmenistan,TKM
+tls,Timor Leste,TLS
+ton,Tonga,TON
+tto,Trinidad & Tobago,TTO
+tun,Tunisia,TUN
+tur,Turkey,TUR
+tuv,Tuvalu,TUV
+tza,Tanzania,TZA
+uga,Uganda,UGA
+ukr,Ukraine,UKR
+ury,Uruguay,URY
+usa,United States of America,USA
+uzb,Uzbekistan,UZB
+vct,St Vincent & the Grenadines,VCT
+ven,Venezuela,VEN
+vnm,Vietnam,VNM
+vut,Vanuatu,VUT
+wsm,Samoa,WSM
+yem,Yemen,YEM
+zaf,South Africa,ZAF
+zmb,Zambia,ZMB
+zwe,Zimbabwe,ZWE
