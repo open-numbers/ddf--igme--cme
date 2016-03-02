@@ -24,7 +24,7 @@ def extract_concepts_continuous(data):
     """extract continuous concepts from source data"""
 
     # headers for dataframe and csv exports
-    headers_continuous = ['concept', 'name', 'type']
+    headers_continuous = ['concept', 'name', 'concept_type']
 
     # get all concepts
     all_ser = data.columns[3:]  # all series name in source file. like "U5MR.1950"
@@ -41,7 +41,7 @@ def extract_concepts_continuous(data):
     concepts_continuous = pd.DataFrame([], columns=headers_continuous)
     concepts_continuous['name'] = concepts
     concepts_continuous['concept'] = concepts_continuous['name'].apply(to_concept_id)
-    concepts_continuous['type'] = 'measure'
+    concepts_continuous['concept_type'] = 'measure'
 
     return concepts_continuous
 
@@ -49,7 +49,7 @@ def extract_concepts_discrete(data):
     """extract discrete concepts from source data"""
 
     # headers for dataframe and csv exports
-    headers_discrete = ['concept', 'name', 'type']
+    headers_discrete = ['concept', 'name', 'concept_type']
 
     # build dataframe
     concept_discrete = data.columns[:3]
@@ -57,7 +57,7 @@ def extract_concepts_discrete(data):
     concept_dis_df = pd.DataFrame([], columns=headers_discrete)
     concept_dis_df['name'] = concept_discrete
     concept_dis_df['concept'] = concept_dis_df['name'].apply(to_concept_id)
-    concept_dis_df['type'] = "string"
+    concept_dis_df['concept_type'] = "string"
 
     # adding the year and country concept manually
     concept_dis_df = concept_dis_df.append(

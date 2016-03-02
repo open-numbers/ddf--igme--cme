@@ -1,4 +1,4 @@
-concept,name,type
+concept,name,concept_type
 u5mr_lower,U5MR.Lower,measure
 u5mr_median,U5MR.Median,measure
 u5mr_upper,U5MR.Upper,measure
