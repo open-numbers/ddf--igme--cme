@@ -52,7 +52,7 @@ def extract_concepts_discrete(data):
     headers_discrete = ['concept', 'name', 'concept_type']
 
     # build dataframe
-    concept_discrete = data.columns[:3]
+    concept_discrete = data.columns[:2]
 
     concept_dis_df = pd.DataFrame([], columns=headers_discrete)
     concept_dis_df['name'] = concept_discrete

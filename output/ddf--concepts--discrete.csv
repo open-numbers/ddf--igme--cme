@@ -1,6 +1,5 @@
 concept,name,concept_type
 iso_code,ISO Code,string
 countryname,CountryName,string
-uncertainty_bounds,Uncertainty bounds*,string
 country,Country,entity_domain
 year,Year,time
