@@ -85,6 +85,7 @@ def extract_entities_country(data):
 
     return entities.loc[:, ::-1]  # move country column at first
 
+
 def extract_datapoints_country_year(data):
     """extract datapoints for each concept by country and year"""
 
@@ -96,7 +97,7 @@ def extract_datapoints_country_year(data):
     metrics = []
     for i in data.columns[3:]:
         s = i[:-5]
-        if not s in metrics:
+        if s not in metrics:
             metrics.append(s)
 
     col = {}
@@ -154,5 +155,5 @@ if __name__ == '__main__':
     print('extracting data points...')
     datapoints = extract_datapoints_country_year(data)
     for c, df in datapoints.items():
-        path = os.path.join(out_dir, 'datapoints', 'ddf--datapoints--'+c+'--by--country--year.csv')
+        path = os.path.join(out_dir, 'ddf--datapoints--'+c+'--by--country--year.csv')
         df.to_csv(path, index=False)
