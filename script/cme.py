@@ -4,6 +4,7 @@
 import pandas as pd
 import numpy as np
 import re
+from index import create_index_file
 
 # configuration of file paths
 source = '../source/RatesDeaths_AllIndicators.xlsx'  # source file path
@@ -157,3 +158,6 @@ if __name__ == '__main__':
     for c, df in datapoints.items():
         path = os.path.join(out_dir, 'ddf--datapoints--'+c+'--by--country--year.csv')
         df.to_csv(path, index=False)
+
+    print('generating index file ...')
+    create_index_file(out_dir, os.path.join(out_dir, 'ddf--index.csv'))

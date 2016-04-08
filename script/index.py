@@ -7,7 +7,7 @@ import os
 import re
 
 # global variables
-out_dir = '/Users/semio/src/work/Gapminder/ddf--cdiac-co2/output'
+out_dir = '../output'
 index_columns = ['key', 'value', 'file']
 
 
@@ -17,7 +17,11 @@ def concept_index(path, concept_file):
 
     with open(os.path.join(path, concept_file)) as f:
         reader = csv.reader(f, delimiter=',', quotechar='"')
-        header = reader.__next__()  # only get the headers. python3 only.
+        # we only need the headers for index file.
+        try:
+            header = reader.__next__()  # python3
+        except AttributeError:
+            header = reader.next()  # python2
 
     header.remove('concept')
     df['value'] = header
@@ -31,14 +35,36 @@ def entity_index(path, entity_file):
 
     df = DataFrame([], columns=index_columns)
 
-    domain = re.match('ddf--entities--([\w_]+)-?.*', entity_file).groups()[0]
+    # get the domain/set name from file name.
+    # there are 2 possible format for entity filename:
+    # 1. ddf--entities--$domain.csv
+    # 2. ddf--entities--$domain--$set.csv
+    match = re.match('ddf--entities--([\w_]+)-*(.*).csv', entity_file).groups()
+    if len(match) == 1:
+        domain = match[0]
+        concept = None
+    else:
+        domain, concept = match
+
     with open(os.path.join(path, entity_file)) as f:
         reader = csv.reader(f, delimiter=',', quotechar='"')
-        header = reader.__next__()
+        # we only need the headers for index file
+        try:
+            header = reader.__next__()  # python3
+        except AttributeError:
+            header = reader.next()  # python2
 
-    header.remove(domain)
+    # find out which key is used in the file.
+    # the key in index should be consistent with the one in entities
+    if domain in header:
+        header.remove(domain)
+        key = domain
+    if concept in header:
+        header.remove(concept)
+        key = concept
+
     df['value'] = header
-    df['key'] = domain
+    df['key'] = key
     df['file'] = entity_file
 
     return df
@@ -51,9 +77,9 @@ def datapoint_index(path, datapoint_file):
 
     key = ','.join(key.split('--'))
 
-    df['value'] = [value]
-    df['key'] = [key]
-    df['file'] = [datapoint_file]
+    df['value'] = value.split('--')
+    df['key'] = key
+    df['file'] = datapoint_file
 
     return df
 
