@@ -7,8 +7,8 @@ import re
 from index import create_index_file
 
 # configuration of file paths
-source = '../source/RatesDeaths_AllIndicators.xlsx'  # source file path
-out_dir = '../output/'  # output dir
+source = './source/RatesDeaths_AllIndicators.xlsx'  # source file path
+out_dir = '../../'  # output dir
 
 
 # functions for building DDF files
