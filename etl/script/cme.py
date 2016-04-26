@@ -7,7 +7,7 @@ import re
 from index import create_index_file
 
 # configuration of file paths
-source = './source/RatesDeaths_AllIndicators.xlsx'  # source file path
+source = '../source/RatesDeaths_AllIndicators.xlsx'  # source file path
 out_dir = '../../'  # output dir
 
 
@@ -30,7 +30,7 @@ def extract_concepts_continuous(data):
     # get all concepts
     all_ser = data.columns[3:]  # all series name in source file. like "U5MR.1950"
 
-    concepts = []  
+    concepts = []
 
     for i in all_ser:
         metric = i[:-5]  # remove the year
