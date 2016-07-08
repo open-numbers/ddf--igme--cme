@@ -21,6 +21,7 @@ def to_concept_id(s):
 
     return s1.strip()
 
+
 def extract_concepts_continuous(data):
     """extract continuous concepts from source data"""
 
@@ -35,7 +36,7 @@ def extract_concepts_continuous(data):
     for i in all_ser:
         metric = i[:-5]  # remove the year
         for prefix in ['.Lower', '.Median', '.Upper']:  # bounds
-            if not metric+prefix in concepts:
+            if metric+prefix not in concepts:
                 concepts.append(metric+prefix)
 
     # build the dataframe
@@ -45,6 +46,7 @@ def extract_concepts_continuous(data):
     concepts_continuous['concept_type'] = 'measure'
 
     return concepts_continuous
+
 
 def extract_concepts_discrete(data):
     """extract discrete concepts from source data"""
@@ -120,13 +122,14 @@ def extract_datapoints_country_year(data):
 
         for p in ['Lower', 'Median', 'Upper']:
             name = to_concept_id(m+'.'+p)
-            headers = ['iso', 'year', name]
+            headers = ['country', 'year', name]
             data_bound = data_metric.ix[gs[p]]
             data_bound = data_bound.set_index('ISO Code')
             data_bound = data_bound.T['1950':]   # the data from source start from 1950
             data_bound = data_bound.unstack().reset_index().dropna()
 
             data_bound.columns = headers
+            data_bound['country'] = data_bound['country'].map(to_concept_id)
 
             res[name] = data_bound
 
