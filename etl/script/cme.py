@@ -4,22 +4,12 @@
 import pandas as pd
 import numpy as np
 import re
-from index import create_index_file
+from ddf_utils.index import create_index_file
+from ddf_utils.str import to_concept_id, format_float_sigfig
 
 # configuration of file paths
 source = '../source/RatesDeaths_AllIndicators.xlsx'  # source file path
 out_dir = '../../'  # output dir
-
-
-# functions for building DDF files
-def to_concept_id(s):
-    '''convert a string to lowercase alphanumeric + underscore id for concepts'''
-    s1 = re.sub(r'[/ -\.\*]+', '_', s).lower()
-
-    if s1[-1] == '_':
-        s1 = s1[:-1]
-
-    return s1.strip()
 
 
 def extract_concepts_continuous(data):
@@ -55,7 +45,8 @@ def extract_concepts_discrete(data):
     headers_discrete = ['concept', 'name', 'concept_type']
 
     # build dataframe
-    concept_discrete = data.columns[:2]
+    concept_discrete = list(data.columns[:2])
+    concept_discrete.append('Name')
 
     concept_dis_df = pd.DataFrame([], columns=headers_discrete)
     concept_dis_df['name'] = concept_discrete
@@ -160,7 +151,8 @@ if __name__ == '__main__':
     datapoints = extract_datapoints_country_year(data)
     for c, df in datapoints.items():
         path = os.path.join(out_dir, 'ddf--datapoints--'+c+'--by--country--year.csv')
+        df[c] = df[c].map(format_float_sigfig)
         df.to_csv(path, index=False)
 
     print('generating index file ...')
-    create_index_file(out_dir, os.path.join(out_dir, 'ddf--index.csv'))
+    create_index_file(out_dir)
