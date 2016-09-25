@@ -61,6 +61,9 @@ def extract_concepts_discrete(data):
         pd.DataFrame([['year', 'Year', 'time']],
                      index=[0], columns=concept_dis_df.columns))
 
+    # Toy changes
+    concept_dis_df.loc[concept_dis_df['concept']=='name', "name"] = 'name LOLOLOL'
+
     return concept_dis_df
 
 
