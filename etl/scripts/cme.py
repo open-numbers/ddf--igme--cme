@@ -4,7 +4,7 @@
 import pandas as pd
 import numpy as np
 import re
-from ddf_utils.index import create_index_file
+from ddf_utils.index import get_datapackage
 from ddf_utils.str import to_concept_id, format_float_sigfig
 
 # configuration of file paths
@@ -158,4 +158,4 @@ if __name__ == '__main__':
         df.to_csv(path, index=False)
 
     print('generating index file ...')
-    create_index_file(out_dir)
+    get_datapackage(out_dir, use_existing=True, to_disk=True)
