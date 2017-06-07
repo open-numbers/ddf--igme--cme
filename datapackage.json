@@ -436,5 +436,231 @@
                 "primaryKey": "country"
             }
         }
-    ]
+    ],
+    "ddfSchema": {
+        "concepts": [
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--concepts--continuous",
+                    "ddf--concepts--discrete"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "concept_type",
+                "resources": [
+                    "ddf--concepts--continuous",
+                    "ddf--concepts--discrete"
+                ]
+            }
+        ],
+        "entities": [
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "iso_code",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "countryname",
+                "resources": [
+                    "ddf--entities--country"
+                ]
+            }
+        ],
+        "datapoints": [
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "imr_lower",
+                "resources": [
+                    "ddf--datapoints--imr_lower--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "imr_median",
+                "resources": [
+                    "ddf--datapoints--imr_median--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "imr_upper",
+                "resources": [
+                    "ddf--datapoints--imr_upper--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "infant_deaths_lower",
+                "resources": [
+                    "ddf--datapoints--infant_deaths_lower--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "infant_deaths_median",
+                "resources": [
+                    "ddf--datapoints--infant_deaths_median--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "infant_deaths_upper",
+                "resources": [
+                    "ddf--datapoints--infant_deaths_upper--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "neonatal_deaths_lower",
+                "resources": [
+                    "ddf--datapoints--neonatal_deaths_lower--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "neonatal_deaths_median",
+                "resources": [
+                    "ddf--datapoints--neonatal_deaths_median--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "neonatal_deaths_upper",
+                "resources": [
+                    "ddf--datapoints--neonatal_deaths_upper--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "nmr_lower",
+                "resources": [
+                    "ddf--datapoints--nmr_lower--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "nmr_median",
+                "resources": [
+                    "ddf--datapoints--nmr_median--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "nmr_upper",
+                "resources": [
+                    "ddf--datapoints--nmr_upper--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "u5mr_lower",
+                "resources": [
+                    "ddf--datapoints--u5mr_lower--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "u5mr_median",
+                "resources": [
+                    "ddf--datapoints--u5mr_median--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "u5mr_upper",
+                "resources": [
+                    "ddf--datapoints--u5mr_upper--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "under_five_deaths_lower",
+                "resources": [
+                    "ddf--datapoints--under_five_deaths_lower--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "under_five_deaths_median",
+                "resources": [
+                    "ddf--datapoints--under_five_deaths_median--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "under_five_deaths_upper",
+                "resources": [
+                    "ddf--datapoints--under_five_deaths_upper--by--country--year"
+                ]
+            }
+        ]
+    }
 }
