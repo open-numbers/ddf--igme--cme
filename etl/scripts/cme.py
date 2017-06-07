@@ -3,8 +3,7 @@
 
 import pandas as pd
 import numpy as np
-import re
-from ddf_utils.index import get_datapackage
+from ddf_utils.datapackage import get_datapackage, dump_json
 from ddf_utils.str import to_concept_id, format_float_sigfig
 
 # configuration of file paths
@@ -19,20 +18,22 @@ def extract_concepts_continuous(data):
     headers_continuous = ['concept', 'name', 'concept_type']
 
     # get all concepts
-    all_ser = data.columns[3:]  # all series name in source file. like "U5MR.1950"
+    all_ser = data.columns[
+        3:]  # all series name in source file. like "U5MR.1950"
 
     concepts = []
 
     for i in all_ser:
         metric = i[:-5]  # remove the year
         for prefix in ['.Lower', '.Median', '.Upper']:  # bounds
-            if metric+prefix not in concepts:
-                concepts.append(metric+prefix)
+            if metric + prefix not in concepts:
+                concepts.append(metric + prefix)
 
     # build the dataframe
     concepts_continuous = pd.DataFrame([], columns=headers_continuous)
     concepts_continuous['name'] = concepts
-    concepts_continuous['concept'] = concepts_continuous['name'].apply(to_concept_id)
+    concepts_continuous['concept'] = concepts_continuous['name'].apply(
+        to_concept_id)
     concepts_continuous['concept_type'] = 'measure'
 
     return concepts_continuous
@@ -55,14 +56,18 @@ def extract_concepts_discrete(data):
 
     # adding the year and country concept manually
     concept_dis_df = concept_dis_df.append(
-        pd.DataFrame([['country', 'Country', 'entity_domain']],
-                     index=[0], columns=concept_dis_df.columns))
+        pd.DataFrame(
+            [['country', 'Country', 'entity_domain']],
+            index=[0],
+            columns=concept_dis_df.columns))
     concept_dis_df = concept_dis_df.append(
-        pd.DataFrame([['year', 'Year', 'time']],
-                     index=[0], columns=concept_dis_df.columns))
+        pd.DataFrame(
+            [['year', 'Year', 'time']],
+            index=[0],
+            columns=concept_dis_df.columns))
 
     # Toy changes
-    concept_dis_df.loc[concept_dis_df['concept']=='name', "name"] = 'name LOLOLOL'
+    concept_dis_df.loc[concept_dis_df['concept'] == 'name', "name"] = 'name'
 
     return concept_dis_df
 
@@ -115,11 +120,12 @@ def extract_datapoints_country_year(data):
         gs = data_metric.groupby(by='Uncertainty bounds*').groups
 
         for p in ['Lower', 'Median', 'Upper']:
-            name = to_concept_id(m+'.'+p)
+            name = to_concept_id(m + '.' + p)
             headers = ['country', 'year', name]
             data_bound = data_metric.ix[gs[p]]
             data_bound = data_bound.set_index('ISO Code')
-            data_bound = data_bound.T['1950':]   # the data from source start from 1950
+            data_bound = data_bound.T[
+                '1950':]  # the data from source start from 1950
             data_bound = data_bound.unstack().reset_index().dropna()
 
             data_bound.columns = headers
@@ -153,9 +159,11 @@ if __name__ == '__main__':
     print('extracting data points...')
     datapoints = extract_datapoints_country_year(data)
     for c, df in datapoints.items():
-        path = os.path.join(out_dir, 'ddf--datapoints--'+c+'--by--country--year.csv')
+        path = os.path.join(
+            out_dir, 'ddf--datapoints--' + c + '--by--country--year.csv')
         df[c] = df[c].map(format_float_sigfig)
         df.to_csv(path, index=False)
 
     print('generating index file ...')
-    get_datapackage(out_dir, use_existing=True, to_disk=True)
+    dump_json(
+        os.path.join(out_dir, 'datapackage.json'), get_datapackage(out_dir))
