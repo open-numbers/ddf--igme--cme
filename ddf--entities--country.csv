@@ -6,7 +6,7 @@ and,Andorra,AND
 are,United Arab Emirates,ARE
 arg,Argentina,ARG
 arm,Armenia,ARM
-atg,Antigua & Barbuda,ATG
+atg,Antigua and Barbuda,ATG
 aus,Australia,AUS
 aut,Austria,AUT
 aze,Azerbaijan,AZE
@@ -18,13 +18,13 @@ bgd,Bangladesh,BGD
 bgr,Bulgaria,BGR
 bhr,Bahrain,BHR
 bhs,Bahamas,BHS
-bih,Bosnia & Herzegovina,BIH
+bih,Bosnia and Herzegovina,BIH
 blr,Belarus,BLR
 blz,Belize,BLZ
-bol,Bolivia,BOL
+bol,Bolivia (Plurinational State of),BOL
 bra,Brazil,BRA
 brb,Barbados,BRB
-brn,Brunei,BRN
+brn,Brunei Darussalam,BRN
 btn,Bhutan,BTN
 bwa,Botswana,BWA
 caf,Central African Republic,CAF
@@ -32,18 +32,18 @@ can,Canada,CAN
 che,Switzerland,CHE
 chl,Chile,CHL
 chn,China,CHN
-civ,Cote d Ivoire,CIV
+civ,Côte d'Ivoire,CIV
 cmr,Cameroon,CMR
-cod,Congo DR,COD
+cod,Democratic Republic of the Congo,COD
 cog,Congo,COG
 cok,Cook Islands,COK
 col,Colombia,COL
 com,Comoros,COM
-cpv,Cape Verde,CPV
+cpv,Cabo Verde,CPV
 cri,Costa Rica,CRI
 cub,Cuba,CUB
 cyp,Cyprus,CYP
-cze,Czech Republic,CZE
+cze,Czechia,CZE
 deu,Germany,DEU
 dji,Djibouti,DJI
 dma,Dominica,DMA
@@ -59,13 +59,13 @@ eth,Ethiopia,ETH
 fin,Finland,FIN
 fji,Fiji,FJI
 fra,France,FRA
-fsm,Federated States of Micronesia,FSM
+fsm,Micronesia (Federated States of),FSM
 gab,Gabon,GAB
 gbr,United Kingdom,GBR
 geo,Georgia,GEO
 gha,Ghana,GHA
 gin,Guinea,GIN
-gmb,Gambia The,GMB
+gmb,Gambia,GMB
 gnb,Guinea-Bissau,GNB
 gnq,Equatorial Guinea,GNQ
 grc,Greece,GRC
@@ -79,7 +79,7 @@ hun,Hungary,HUN
 idn,Indonesia,IDN
 ind,India,IND
 irl,Ireland,IRL
-irn,Iran,IRN
+irn,Iran (Islamic Republic of),IRN
 irq,Iraq,IRQ
 isl,Iceland,ISL
 isr,Israel,ISR
@@ -92,10 +92,10 @@ ken,Kenya,KEN
 kgz,Kyrgyzstan,KGZ
 khm,Cambodia,KHM
 kir,Kiribati,KIR
-kna,Saint Kitts & Nevis,KNA
-kor,Korea Rep,KOR
+kna,Saint Kitts and Nevis,KNA
+kor,Republic of Korea,KOR
 kwt,Kuwait,KWT
-lao,Lao PDR,LAO
+lao,Lao People's Democratic Republic,LAO
 lbn,Lebanon,LBN
 lbr,Liberia,LBR
 lby,Libya,LBY
@@ -107,12 +107,12 @@ lux,Luxembourg,LUX
 lva,Latvia,LVA
 mar,Morocco,MAR
 mco,Monaco,MCO
-mda,Moldova,MDA
+mda,Republic of Moldova,MDA
 mdg,Madagascar,MDG
 mdv,Maldives,MDV
 mex,Mexico,MEX
 mhl,Marshall Islands,MHL
-mkd,Macedonia,MKD
+mkd,The former Yugoslav Republic of Macedonia,MKD
 mli,Mali,MLI
 mlt,Malta,MLT
 mmr,Myanmar,MMR
@@ -141,7 +141,7 @@ phl,Philippines,PHL
 plw,Palau,PLW
 png,Papua New Guinea,PNG
 pol,Poland,POL
-prk,Korea DPR,PRK
+prk,Democratic People's Republic of Korea,PRK
 prt,Portugal,PRT
 pry,Paraguay,PRY
 pse,State of Palestine,PSE
@@ -160,37 +160,43 @@ smr,San Marino,SMR
 som,Somalia,SOM
 srb,Serbia,SRB
 ssd,South Sudan,SSD
-stp,Sao Tome & Principe,STP
+stp,Sao Tome and Principe,STP
 sur,Suriname,SUR
 svk,Slovakia,SVK
 svn,Slovenia,SVN
 swe,Sweden,SWE
 swz,Swaziland,SWZ
 syc,Seychelles,SYC
-syr,Syria,SYR
+syr,Syrian Arab Republic,SYR
 tcd,Chad,TCD
 tgo,Togo,TGO
 tha,Thailand,THA
 tjk,Tajikistan,TJK
 tkm,Turkmenistan,TKM
-tls,Timor Leste,TLS
+tls,Timor-Leste,TLS
 ton,Tonga,TON
-tto,Trinidad & Tobago,TTO
+tto,Trinidad and Tobago,TTO
 tun,Tunisia,TUN
 tur,Turkey,TUR
 tuv,Tuvalu,TUV
-tza,Tanzania,TZA
+tza,United Republic of Tanzania,TZA
 uga,Uganda,UGA
 ukr,Ukraine,UKR
 ury,Uruguay,URY
-usa,United States of America,USA
+usa,United States,USA
 uzb,Uzbekistan,UZB
-vct,St Vincent & the Grenadines,VCT
-ven,Venezuela,VEN
-vnm,Vietnam,VNM
+vct,Saint Vincent and the Grenadines,VCT
+ven,Venezuela (Bolivarian Republic of),VEN
+vnm,Viet Nam,VNM
 vut,Vanuatu,VUT
 wsm,Samoa,WSM
 yem,Yemen,YEM
 zaf,South Africa,ZAF
 zmb,Zambia,ZMB
 zwe,Zimbabwe,ZWE
+,,
+notes,,Notes:
+lower_and_upper_refer_to_the_lower_bound_and_upper_bound_of_90pct_uncertainty_intervals,,* Lower and Upper refer to the lower bound and upper bound of 90% uncertainty intervals
+u5mr_is_the_under_five_mortlality_rate_probability_of_dying_between_birth_and_exactly_5_years_of_age_expressed_per_1_000_live_births,,"U5MR is the under-five mortlality rate (Probability of dying between birth and exactly 5 years of age, expressed per 1,000 live births)"
+imr_is_the_infant_mortality_rate_probability_of_dying_between_birth_and_exactly_1_year_of_age_expressed_per_1_000_live_births,,"IMR is the infant mortality rate (Probability of dying between birth and exactly 1 year of age, expressed per 1,000 live births)"
+nmr_is_the_neonatal_mortality_rate_probability_of_dying_in_the_first_28_days_of_life_expressed_per_1_000_live_births,,"NMR is the neonatal mortality rate (Probability of dying in the ﬁrst 28 days of life, expressed per 1,000 live births)"
