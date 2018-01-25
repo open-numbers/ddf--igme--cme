@@ -134,7 +134,7 @@ if __name__ == '__main__':
     import os
 
     print('updating source files...')
-    #bulk_download(source_path, name=source_name)
+    bulk_download(source_path, name=source_name)
     data = pd.read_excel(os.path.join(source_path, source_name+'.xlsx'), skiprows=6)
 
     print('extracting concept files...')
