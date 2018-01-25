@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 """transform Child Mortality Estimates set into DDF model"""
 
+import os
 import pandas as pd
 import numpy as np
 import re
-from ddf_utils.datapackage import get_datapackage
+from ddf_utils.datapackage import get_datapackage, dump_json
 from ddf_utils.str import to_concept_id, format_float_sigfig
+from ddf_utils.factory.igme import bulk_download
 
 # configuration of file paths
-source = '../source/RatesDeaths_AllIndicators.xlsx'  # source file path
+source_path = '../source/'
+source_name = 'UNIGME Rates & Deaths_Under5'  # source xlsx name
 out_dir = '../../'  # output dir
 
 
@@ -130,8 +133,9 @@ def extract_datapoints_country_year(data):
 if __name__ == '__main__':
     import os
 
-    print('reading source file...')
-    data = pd.read_excel(source, skiprows=6)
+    print('updating source files...')
+    #bulk_download(source_path, name=source_name)
+    data = pd.read_excel(os.path.join(source_path, source_name+'.xlsx'), skiprows=6)
 
     print('extracting concept files...')
     continuous = extract_concepts_continuous(data)
@@ -155,4 +159,5 @@ if __name__ == '__main__':
         df.to_csv(path, index=False)
 
     print('generating datapackage.json ...')
-    get_datapackage(out_dir, update=True)
+    dps = get_datapackage(out_dir, update=True)
+    dump_json(os.path.join(out_dir, 'datapackage.json'), dps)
