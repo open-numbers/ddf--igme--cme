@@ -1,6 +1,5 @@
 concept,name,concept_type
 iso_code,ISO Code,string
-countryname,CountryName,string
-name,Name,string
 country,Country,entity_domain
+name,Name,string
 year,Year,time

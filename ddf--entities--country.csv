@@ -1,4 +1,4 @@
-country,countryname,iso_code
+country,name,iso_code
 afg,Afghanistan,AFG
 ago,Angola,AGO
 alb,Albania,ALB
@@ -165,7 +165,7 @@ sur,Suriname,SUR
 svk,Slovakia,SVK
 svn,Slovenia,SVN
 swe,Sweden,SWE
-swz,Swaziland,SWZ
+swz,Eswatini,SWZ
 syc,Seychelles,SYC
 syr,Syrian Arab Republic,SYR
 tcd,Chad,TCD
@@ -186,7 +186,7 @@ ury,Uruguay,URY
 usa,United States,USA
 uzb,Uzbekistan,UZB
 vct,Saint Vincent and the Grenadines,VCT
-ven,Venezuela (Bolivarian Republic of),VEN
+ven,Venezuela (Bolivarian Republic of)**,VEN
 vnm,Viet Nam,VNM
 vut,Vanuatu,VUT
 wsm,Samoa,WSM
@@ -194,9 +194,3 @@ yem,Yemen,YEM
 zaf,South Africa,ZAF
 zmb,Zambia,ZMB
 zwe,Zimbabwe,ZWE
-,,
-notes,,Notes:
-lower_and_upper_refer_to_the_lower_bound_and_upper_bound_of_90pct_uncertainty_intervals,,* Lower and Upper refer to the lower bound and upper bound of 90% uncertainty intervals
-u5mr_is_the_under_five_mortlality_rate_probability_of_dying_between_birth_and_exactly_5_years_of_age_expressed_per_1_000_live_births,,"U5MR is the under-five mortlality rate (Probability of dying between birth and exactly 5 years of age, expressed per 1,000 live births)"
-imr_is_the_infant_mortality_rate_probability_of_dying_between_birth_and_exactly_1_year_of_age_expressed_per_1_000_live_births,,"IMR is the infant mortality rate (Probability of dying between birth and exactly 1 year of age, expressed per 1,000 live births)"
-nmr_is_the_neonatal_mortality_rate_probability_of_dying_in_the_first_28_days_of_life_expressed_per_1_000_live_births,,"NMR is the neonatal mortality rate (Probability of dying in the ﬁrst 28 days of life, expressed per 1,000 live births)"
