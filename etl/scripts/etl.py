@@ -47,18 +47,15 @@ def extract_concepts_discrete(data):
     headers_discrete = ['concept', 'name', 'concept_type']
 
     # build dataframe
-    concept_discrete = list(data.columns[:2])
+    concept_discrete = list(data.columns[:2])  # ISO, Country, uncertainty bound
     concept_discrete.append('Name')
 
     concept_dis_df = pd.DataFrame([], columns=headers_discrete)
     concept_dis_df['name'] = concept_discrete
     concept_dis_df['concept'] = concept_dis_df['name'].apply(to_concept_id)
-    concept_dis_df['concept_type'] = "string"
+    concept_dis_df['concept_type'] = ["string", "entity_domain", "string"]
 
-    # adding the year and country concept manually
-    concept_dis_df = concept_dis_df.append(
-        pd.DataFrame([['country', 'Country', 'entity_domain']],
-                     index=[0], columns=concept_dis_df.columns))
+    # adding the year concept
     concept_dis_df = concept_dis_df.append(
         pd.DataFrame([['year', 'Year', 'time']],
                      index=[0], columns=concept_dis_df.columns))
@@ -70,10 +67,10 @@ def extract_entities_country(data):
     """extract country entities from source data"""
 
     # headers for dataframe and csv exports
-    headers_entities = ['iso_code', 'countryname', 'country']
+    headers_entities = ['iso_code', 'name', 'country']
 
     # build dataframe
-    entities = data[['ISO Code', 'CountryName']].copy()
+    entities = data[['ISO Code', 'Country']].copy()
     entities['country'] = entities['ISO Code'].apply(to_concept_id)
 
     entities.columns = headers_entities
@@ -96,6 +93,8 @@ def extract_datapoints_country_year(data):
         if s not in metrics:
             metrics.append(s)
 
+    print("metrics in the sheet: {}".format(metrics))
+
     col = {}
     for m in metrics:
         col[m] = list(filter(lambda x: x.startswith(m), data.columns))
@@ -111,28 +110,34 @@ def extract_datapoints_country_year(data):
         data_metric = data[col_metric].copy()
         data_metric.columns = col_metric_new
 
-        gs = data_metric.groupby(by='Uncertainty bounds*').groups
+        gs = data_metric.groupby(by='Uncertainty bounds*')
 
         for p in ['Lower', 'Median', 'Upper']:
             name = to_concept_id(m+'.'+p)
-            headers = ['country', 'year', name]
-            data_bound = data_metric.ix[gs[p]]
+            data_bound = gs.get_group(p)
             data_bound = data_bound.set_index('ISO Code')
-            data_bound = data_bound.T['1950':]   # the data from source start from 1950
-            data_bound = data_bound.unstack().reset_index().dropna()
+            data_bound = (data_bound.drop(['Country', 'Uncertainty bounds*'], axis=1)
+                          .unstack().reset_index().dropna())
 
-            data_bound.columns = headers
+            # after unstack() the year column will be the first column.
+            data_bound.columns = ['year', 'country', name]
+            data_bound = data_bound[['country', 'year', name]].sort_values(by=['country', 'year'])
             data_bound['country'] = data_bound['country'].map(to_concept_id)
-
             res[name] = data_bound
-
+    print(list(res.keys()))
     return res
 
 
 if __name__ == '__main__':
-    import os
-
-    data = pd.read_excel(os.path.join(source_path, source_name+'.xlsx'), skiprows=6)
+    print('reading source file...')
+    sheets = ['Rates and Deaths U5MR', 'Rates and Deaths IMR', 'Rates and Deaths NMR', 'Rates and Deaths CMR']
+    data = list()
+    for s in sheets:
+        df = pd.read_excel(os.path.join(source_path, source_name+'.xlsx'),
+                           skiprows=10, skipfooter=1, sheet_name=s).dropna(how='all', axis=1)
+        data.append(df)
+    data = pd.concat(data, sort=False)
+    # import ipdb; ipdb.set_trace()
 
     print('extracting concept files...')
     continuous = extract_concepts_continuous(data)
