@@ -4,8 +4,8 @@
 import os
 import pandas as pd
 import numpy as np
-import re
-from ddf_utils.datapackage import get_datapackage, dump_json
+from ddf_utils.io import dump_json
+from ddf_utils.model.package import DataPackage as DP
 from ddf_utils.str import to_concept_id, format_float_sigfig
 
 # configuration of file paths
@@ -28,8 +28,8 @@ def extract_concepts_continuous(data):
     for i in all_ser:
         metric = i[:-5]  # remove the year
         for prefix in ['.Lower', '.Median', '.Upper']:  # bounds
-            if metric+prefix not in concepts:
-                concepts.append(metric+prefix)
+            if metric + prefix not in concepts:
+                concepts.append(metric + prefix)
 
     # build the dataframe
     concepts_continuous = pd.DataFrame([], columns=headers_continuous)
@@ -113,7 +113,7 @@ def extract_datapoints_country_year(data):
         gs = data_metric.groupby(by='Uncertainty bounds*')
 
         for p in ['Lower', 'Median', 'Upper']:
-            name = to_concept_id(m+'.'+p)
+            name = to_concept_id(m + '.' + p)
             data_bound = gs.get_group(p)
             data_bound = data_bound.set_index('ISO Code')
             data_bound = (data_bound.drop(['Country', 'Uncertainty bounds*'], axis=1)
@@ -133,7 +133,7 @@ if __name__ == '__main__':
     sheets = ['Rates and Deaths U5MR', 'Rates and Deaths IMR', 'Rates and Deaths NMR', 'Rates and Deaths CMR']
     data = list()
     for s in sheets:
-        df = pd.read_excel(os.path.join(source_path, source_name+'.xlsx'),
+        df = pd.read_excel(os.path.join(source_path, source_name + '.xlsx'),
                            skiprows=10, skipfooter=1, sheet_name=s).dropna(how='all', axis=1)
         data.append(df)
     data = pd.concat(data, sort=False)
@@ -156,10 +156,10 @@ if __name__ == '__main__':
     print('extracting data points...')
     datapoints = extract_datapoints_country_year(data)
     for c, df in datapoints.items():
-        path = os.path.join(out_dir, 'ddf--datapoints--'+c+'--by--country--year.csv')
+        path = os.path.join(out_dir, 'ddf--datapoints--' + c + '--by--country--year.csv')
         df[c] = df[c].map(format_float_sigfig)
         df.to_csv(path, index=False)
 
     print('generating datapackage.json ...')
-    dps = get_datapackage(out_dir, update=True)
+    dps = DP.get_datapackage(out_dir, update=True)
     dump_json(os.path.join(out_dir, 'datapackage.json'), dps)
