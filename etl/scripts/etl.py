@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import numpy as np
 from ddf_utils.io import dump_json
-from ddf_utils.model.package import DataPackage as DP
+from ddf_utils.package import get_datapackage
 from ddf_utils.str import to_concept_id, format_float_sigfig
 
 # configuration of file paths
@@ -161,5 +161,5 @@ if __name__ == '__main__':
         df.to_csv(path, index=False)
 
     print('generating datapackage.json ...')
-    dps = DP.get_datapackage(out_dir, update=True)
+    dps = get_datapackage(out_dir, update=True)
     dump_json(os.path.join(out_dir, 'datapackage.json'), dps)
