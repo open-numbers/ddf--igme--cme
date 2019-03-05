@@ -10,7 +10,7 @@ from ddf_utils.str import to_concept_id, format_float_sigfig
 
 # configuration of file paths
 source_path = '../source/'
-source_name = 'UNIGME Rates & Deaths_Under5'  # source xlsx name
+source_name = 'UNIGME-Rates-Deaths_Under5.xlsx'  # source xlsx name
 out_dir = '../../'  # output dir
 
 
@@ -133,7 +133,7 @@ if __name__ == '__main__':
     sheets = ['Rates and Deaths U5MR', 'Rates and Deaths IMR', 'Rates and Deaths NMR', 'Rates and Deaths CMR']
     data = list()
     for s in sheets:
-        df = pd.read_excel(os.path.join(source_path, source_name + '.xlsx'),
+        df = pd.read_excel(os.path.join(source_path, source_name),
                            skiprows=10, skipfooter=1, sheet_name=s).dropna(how='all', axis=1)
         data.append(df)
     data = pd.concat(data, sort=False)

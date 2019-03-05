@@ -4,7 +4,7 @@ from ddf_utils.factory import IGMELoader
 
 
 source_path = '../source/'
-source_name = 'UNIGME Rates & Deaths_Under5'
+source_name = 'UNIGME-Rates-Deaths_Under5'
 
 if __name__ == '__main__':
     print('updating source files...')
