@@ -1,165 +1,263 @@
 # -*- coding: utf-8 -*-
-"""transform Child Mortality Estimates set into DDF model"""
+"""Transform Child Mortality Estimates (2024) into DDF model.
+
+Source: https://childmortality.org/all-cause-mortality/data/download
+Uses UN IGME 2024 CSV data in long format.
+"""
 
 import os
-import pandas as pd
-import numpy as np
+import polars as pl
 from ddf_utils.io import dump_json
 from ddf_utils.package import get_datapackage
 from ddf_utils.str import to_concept_id, format_float_sigfig
 
 # configuration of file paths
-source_path = '../source/'
-source_name = 'UNIGME-Rates-Deaths_Under5.xlsx'  # source xlsx name
-out_dir = '../../'  # output dir
+source_path = "../source/"
+source_name = "UN IGME 2024.csv"
+out_dir = "../../"
+
+# Mapping from source indicator names to concept base names
+INDICATOR_MAPPING = {
+    # Core mortality rates
+    "Under-five mortality rate": "u5mr",
+    "Infant mortality rate": "imr",
+    "Neonatal mortality rate": "nmr",
+    "Child Mortality rate age 1-4": "cmr",
+    "Mortality rate 1-59 months": "mr_1_59_months",
+    "Mortality rate age 1-11 months": "mr_1_11_months",
+    "Mortality rate age 5-9": "mr_5_9",
+    "Mortality rate age 10-14": "mr_10_14",
+    "Mortality rate age 5-14": "mr_5_14",
+    "Mortality rate age 15-19": "mr_15_19",
+    "Mortality rate age 10-19": "mr_10_19",
+    "Mortality rate age 20-24": "mr_20_24",
+    "Mortality rate age 15-24": "mr_15_24",
+    "Mortality rate age 5-24": "mr_5_24",
+    "Stillbirth rate": "stillbirth_rate",
+    # Deaths counts
+    "Under-five deaths": "under_five_deaths",
+    "Infant deaths": "infant_deaths",
+    "Neonatal deaths": "neonatal_deaths",
+    "Child deaths age 1 to 4": "child_deaths_1_4years",
+    "Deaths age 1-59 months": "deaths_1_59_months",
+    "Deaths age 1-11 months": "deaths_1_11_months",
+    "Deaths age 5 to 9": "deaths_5_9",
+    "Deaths age 10 to 14": "deaths_10_14",
+    "Deaths age 5 to 14": "deaths_5_14",
+    "Deaths age 15 to 19": "deaths_15_19",
+    "Deaths age 10 to 19": "deaths_10_19",
+    "Deaths age 20 to 24": "deaths_20_24",
+    "Deaths age 15 to 24": "deaths_15_24",
+    "Deaths age 5 to 24": "deaths_5_24",
+    "Stillbirths": "stillbirths",
+}
+
+# Mapping from Regional group to entity set
+ENTITY_SET_MAPPING = {
+    "": "country",
+    "UNICEF": "unicef_region",
+    "UNSDG": "unsdg_region",
+    "WB": "wb_group",
+    "WORLD": "world",
+}
 
 
-def extract_concepts_continuous(data):
-    """extract continuous concepts from source data"""
+def load_source_data(source_path: str, source_name: str) -> pl.LazyFrame:
+    """Load and filter source CSV for UN IGME estimates."""
+    return (
+        pl.scan_csv(os.path.join(source_path, source_name))
+        .filter(pl.col("Series Name") == "UN IGME estimate")
+        .filter(pl.col("Sex") == "Total")
+        .filter(pl.col("Wealth Quintile") == "Total")
+    )
 
-    # headers for dataframe and csv exports
-    headers_continuous = ['concept', 'name', 'concept_type']
 
-    # get all concepts
-    all_ser = data.columns[3:]  # all series name in source file. like "U5MR.1950"
-
+def extract_concepts_continuous(indicators: list[str]) -> pl.DataFrame:
+    """Extract continuous concepts from the indicators list."""
     concepts = []
-
-    for i in all_ser:
-        metric = i[:-5]  # remove the year
-        for prefix in ['.Lower', '.Median', '.Upper']:  # bounds
-            if metric + prefix not in concepts:
-                concepts.append(metric + prefix)
-
-    # build the dataframe
-    concepts_continuous = pd.DataFrame([], columns=headers_continuous)
-    concepts_continuous['name'] = concepts
-    concepts_continuous['concept'] = concepts_continuous['name'].apply(to_concept_id)
-    concepts_continuous['concept_type'] = 'measure'
-
-    return concepts_continuous
+    for indicator in indicators:
+        base_name = INDICATOR_MAPPING.get(indicator, to_concept_id(indicator))
+        for suffix in ["lower", "median", "upper"]:
+            concept_id = f"{base_name}_{suffix}"
+            name = f"{indicator} ({suffix.title()})"
+            concepts.append({"concept": concept_id, "name": name, "concept_type": "measure"})
+    return pl.DataFrame(concepts)
 
 
-def extract_concepts_discrete(data):
-    """extract discrete concepts from source data"""
-
-    # headers for dataframe and csv exports
-    headers_discrete = ['concept', 'name', 'concept_type']
-
-    # build dataframe
-    concept_discrete = list(data.columns[:2])  # ISO, Country, uncertainty bound
-    concept_discrete.append('Name')
-
-    concept_dis_df = pd.DataFrame([], columns=headers_discrete)
-    concept_dis_df['name'] = concept_discrete
-    concept_dis_df['concept'] = concept_dis_df['name'].apply(to_concept_id)
-    concept_dis_df['concept_type'] = ["string", "entity_domain", "string"]
-
-    # adding the year concept
-    concept_dis_df = concept_dis_df.append(
-        pd.DataFrame([['year', 'Year', 'time']],
-                     index=[0], columns=concept_dis_df.columns))
-
-    return concept_dis_df
-
-
-def extract_entities_country(data):
-    """extract country entities from source data"""
-
-    # headers for dataframe and csv exports
-    headers_entities = ['iso_code', 'name', 'country']
-
-    # build dataframe
-    entities = data[['ISO Code', 'Country']].copy()
-    entities['country'] = entities['ISO Code'].apply(to_concept_id)
-
-    entities.columns = headers_entities
-    entities = entities.drop_duplicates()
-
-    return entities.loc[:, ::-1]  # move country column at first
-
-
-def extract_datapoints_country_year(data):
-    """extract datapoints for each concept by country and year"""
-
-    # first, construct a dict that contains all metrics as key and a list of
-    # columns related to a metric as value of a key.
-    # we will later pass the dict to data.loc[: col[key]] to get all data
-    # point for a metric.
-
-    metrics = []
-    for i in data.columns[3:]:
-        s = i[:-5]
-        if s not in metrics:
-            metrics.append(s)
-
-    print("metrics in the sheet: {}".format(metrics))
-
-    col = {}
-    for m in metrics:
-        col[m] = list(filter(lambda x: x.startswith(m), data.columns))
-
-    # now we loop through each metrics and create data frame.
-    res = {}
-    for m in metrics:
-        col_metric = np.r_[data.columns[:3], col[m]]
-        # change the column form metirc.year to year
-        col_metric_new = list(map(lambda x: x[-4:], col[m]))
-        col_metric_new = np.r_[data.columns[:3], col_metric_new]
-
-        data_metric = data[col_metric].copy()
-        data_metric.columns = col_metric_new
-
-        gs = data_metric.groupby(by='Uncertainty bounds*')
-
-        for p in ['Lower', 'Median', 'Upper']:
-            name = to_concept_id(m + '.' + p)
-            data_bound = gs.get_group(p)
-            data_bound = data_bound.set_index('ISO Code')
-            data_bound = (data_bound.drop(['Country', 'Uncertainty bounds*'], axis=1)
-                          .unstack().reset_index().dropna())
-
-            # after unstack() the year column will be the first column.
-            data_bound.columns = ['year', 'country', name]
-            data_bound = data_bound[['country', 'year', name]].sort_values(by=['country', 'year'])
-            data_bound['country'] = data_bound['country'].map(to_concept_id)
-            res[name] = data_bound
-    print(list(res.keys()))
-    return res
+def extract_concepts_discrete() -> pl.DataFrame:
+    """Extract discrete concepts."""
+    return pl.DataFrame(
+        [
+            {
+                "concept": "geo",
+                "name": "Geographic Location",
+                "concept_type": "entity_domain",
+                "domain": None,
+            },
+            {
+                "concept": "country",
+                "name": "Country",
+                "concept_type": "entity_set",
+                "domain": "geo",
+            },
+            {
+                "concept": "unicef_region",
+                "name": "UNICEF Region",
+                "concept_type": "entity_set",
+                "domain": "geo",
+            },
+            {
+                "concept": "unsdg_region",
+                "name": "UN SDG Region",
+                "concept_type": "entity_set",
+                "domain": "geo",
+            },
+            {
+                "concept": "wb_group",
+                "name": "World Bank Group",
+                "concept_type": "entity_set",
+                "domain": "geo",
+            },
+            {
+                "concept": "world",
+                "name": "World",
+                "concept_type": "entity_set",
+                "domain": "geo",
+            },
+            {
+                "concept": "name",
+                "name": "Name",
+                "concept_type": "string",
+                "domain": None,
+            },
+            {
+                "concept": "domain",
+                "name": "Domain",
+                "concept_type": "string",
+                "domain": None,
+            },
+            {
+                "concept": "year",
+                "name": "Year",
+                "concept_type": "time",
+                "domain": None,
+            },
+        ]
+    )
 
 
-if __name__ == '__main__':
-    print('reading source file...')
-    sheets = ['Rates and Deaths U5MR', 'Rates and Deaths IMR', 'Rates and Deaths NMR', 'Rates and Deaths CMR']
-    data = list()
-    for s in sheets:
-        df = pd.read_excel(os.path.join(source_path, source_name),
-                           skiprows=10, skipfooter=1, sheet_name=s).dropna(how='all', axis=1)
-        data.append(df)
-    data = pd.concat(data, sort=False)
-    # import ipdb; ipdb.set_trace()
+def extract_entities_geo(data: pl.LazyFrame) -> pl.DataFrame:
+    """Extract geo entities from source data with entity set flags."""
+    entities = (
+        data.select(
+            [
+                pl.col("REF_AREA").str.to_lowercase().alias("geo"),
+                pl.col("Geographic area").alias("name"),
+                pl.col("Regional group").fill_null("").alias("regional_group"),
+            ]
+        )
+        .unique()
+        .collect()
+        .sort("geo")
+    )
 
-    print('extracting concept files...')
-    continuous = extract_concepts_continuous(data)
-    path = os.path.join(out_dir, 'ddf--concepts--continuous.csv')
-    continuous.to_csv(path, index=False)
+    # Add entity set flag columns (uppercase TRUE/FALSE)
+    for regional_group, entity_set in ENTITY_SET_MAPPING.items():
+        entities = entities.with_columns(
+            pl.when(pl.col("regional_group") == regional_group)
+            .then(pl.lit("TRUE"))
+            .otherwise(pl.lit("FALSE"))
+            .alias(f"is--{entity_set}")
+        )
 
-    discrete = extract_concepts_discrete(data)
-    path = os.path.join(out_dir, 'ddf--concepts--discrete.csv')
-    discrete.to_csv(path, index=False)
+    # Drop the temporary regional_group column
+    entities = entities.drop("regional_group")
 
-    print('extracting entities files...')
-    entities = extract_entities_country(data)
-    path = os.path.join(out_dir, 'ddf--entities--country.csv')
-    entities.to_csv(path, index=False)
+    return entities
 
-    print('extracting data points...')
-    datapoints = extract_datapoints_country_year(data)
-    for c, df in datapoints.items():
-        path = os.path.join(out_dir, 'ddf--datapoints--' + c + '--by--country--year.csv')
-        df[c] = df[c].map(format_float_sigfig)
-        df.to_csv(path, index=False)
 
-    print('generating datapackage.json ...')
-    dps = get_datapackage(out_dir, update=True)
-    dump_json(os.path.join(out_dir, 'datapackage.json'), dps)
+def extract_datapoints(data: pl.LazyFrame, indicators: list[str]) -> dict[str, pl.DataFrame]:
+    """Extract datapoints for each concept by geo and year."""
+    result = {}
+
+    for indicator in indicators:
+        base_name = INDICATOR_MAPPING.get(indicator, to_concept_id(indicator))
+        print(f"Processing indicator: {indicator} -> {base_name}")
+
+        indicator_data = (
+            data.filter(pl.col("Indicator") == indicator)
+            .select(
+                [
+                    pl.col("REF_AREA").str.to_lowercase().alias("geo"),
+                    pl.col("Reference Date").ceil().cast(pl.Int64).alias("year"),
+                    pl.col("Observation Value").alias("median"),
+                    pl.col("Lower Bound").alias("lower"),
+                    pl.col("Upper Bound").alias("upper"),
+                ]
+            )
+            .collect()
+        )
+
+        # Create separate dataframes for lower, median, upper
+        for bound in ["lower", "median", "upper"]:
+            concept_id = f"{base_name}_{bound}"
+            df = (
+                indicator_data.select(["geo", "year", bound])
+                .rename({bound: concept_id})
+                .drop_nulls(concept_id)
+                .sort(["geo", "year"])
+            )
+            if len(df) > 0:
+                result[concept_id] = df
+
+    return result
+
+
+def main():
+    print("Reading source file...")
+    data = load_source_data(source_path, source_name)
+
+    # Get list of available indicators
+    available_indicators = data.select("Indicator").unique().collect().to_series().to_list()
+
+    # Filter to only indicators we have mappings for
+    indicators = [i for i in available_indicators if i in INDICATOR_MAPPING]
+    print(f"Found {len(indicators)} indicators: {indicators}")
+
+    print("Extracting concept files...")
+    continuous = extract_concepts_continuous(indicators)
+    path = os.path.join(out_dir, "ddf--concepts--continuous.csv")
+    continuous.write_csv(path)
+
+    discrete = extract_concepts_discrete()
+    path = os.path.join(out_dir, "ddf--concepts--discrete.csv")
+    discrete.write_csv(path)
+
+    print("Extracting entities files...")
+    entities = extract_entities_geo(data)
+    path = os.path.join(out_dir, "ddf--entities--geo.csv")
+    entities.write_csv(path)
+
+    print("Extracting data points...")
+    datapoints = extract_datapoints(data, indicators)
+    for concept_id, df in datapoints.items():
+        path = os.path.join(out_dir, f"ddf--datapoints--{concept_id}--by--geo--year.csv")
+        # Format floats with significant figures
+        df = df.with_columns(
+            pl.col(concept_id).map_elements(
+                lambda x: format_float_sigfig(x) if x is not None else None,
+                return_dtype=pl.String,
+            )
+        )
+        df.write_csv(path)
+        print(f"  Wrote {len(df)} rows to {concept_id}")
+
+    # print("Generating datapackage.json...")
+    # dps = get_datapackage(out_dir, update=True)
+    # dump_json(os.path.join(out_dir, "datapackage.json"), dps)
+
+    print("Done!")
+
+
+if __name__ == "__main__":
+    main()
