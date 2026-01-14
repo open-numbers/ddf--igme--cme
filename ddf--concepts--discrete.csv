@@ -1,5 +1,10 @@
-concept,name,concept_type
-iso_code,ISO Code,string
-country,Country,entity_domain
-name,Name,string
-year,Year,time
+concept,name,concept_type,domain
+geo,Geographic Location,entity_domain,
+country,Country,entity_set,geo
+unicef_region,UNICEF Region,entity_set,geo
+unsdg_region,UN SDG Region,entity_set,geo
+wb_group,World Bank Group,entity_set,geo
+world,World,entity_set,geo
+name,Name,string,
+domain,Domain,string,
+year,Year,time,

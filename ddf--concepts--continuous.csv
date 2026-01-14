@@ -1,25 +1,91 @@
 concept,name,concept_type
-u5mr_lower,U5MR.Lower,measure
-u5mr_median,U5MR.Median,measure
-u5mr_upper,U5MR.Upper,measure
-under_five_deaths_lower,Under.five.Deaths.Lower,measure
-under_five_deaths_median,Under.five.Deaths.Median,measure
-under_five_deaths_upper,Under.five.Deaths.Upper,measure
-imr_lower,IMR.Lower,measure
-imr_median,IMR.Median,measure
-imr_upper,IMR.Upper,measure
-infant_deaths_lower,Infant.Deaths.Lower,measure
-infant_deaths_median,Infant.Deaths.Median,measure
-infant_deaths_upper,Infant.Deaths.Upper,measure
-nmr_lower,NMR.Lower,measure
-nmr_median,NMR.Median,measure
-nmr_upper,NMR.Upper,measure
-neonatal_deaths_lower,Neonatal.Deaths.Lower,measure
-neonatal_deaths_median,Neonatal.Deaths.Median,measure
-neonatal_deaths_upper,Neonatal.Deaths.Upper,measure
-cmr_lower,CMR.Lower,measure
-cmr_median,CMR.Median,measure
-cmr_upper,CMR.Upper,measure
-child_deaths_1_4years_lower,Child.deaths.1-4years.Lower,measure
-child_deaths_1_4years_median,Child.deaths.1-4years.Median,measure
-child_deaths_1_4years_upper,Child.deaths.1-4years.Upper,measure
+neonatal_deaths_lower,Neonatal deaths (Lower),measure
+neonatal_deaths_median,Neonatal deaths (Median),measure
+neonatal_deaths_upper,Neonatal deaths (Upper),measure
+deaths_10_14_lower,Deaths age 10 to 14 (Lower),measure
+deaths_10_14_median,Deaths age 10 to 14 (Median),measure
+deaths_10_14_upper,Deaths age 10 to 14 (Upper),measure
+mr_1_59_months_lower,Mortality rate 1-59 months (Lower),measure
+mr_1_59_months_median,Mortality rate 1-59 months (Median),measure
+mr_1_59_months_upper,Mortality rate 1-59 months (Upper),measure
+imr_lower,Infant mortality rate (Lower),measure
+imr_median,Infant mortality rate (Median),measure
+imr_upper,Infant mortality rate (Upper),measure
+deaths_1_11_months_lower,Deaths age 1-11 months (Lower),measure
+deaths_1_11_months_median,Deaths age 1-11 months (Median),measure
+deaths_1_11_months_upper,Deaths age 1-11 months (Upper),measure
+child_deaths_1_4years_lower,Child deaths age 1 to 4 (Lower),measure
+child_deaths_1_4years_median,Child deaths age 1 to 4 (Median),measure
+child_deaths_1_4years_upper,Child deaths age 1 to 4 (Upper),measure
+deaths_15_24_lower,Deaths age 15 to 24 (Lower),measure
+deaths_15_24_median,Deaths age 15 to 24 (Median),measure
+deaths_15_24_upper,Deaths age 15 to 24 (Upper),measure
+deaths_5_9_lower,Deaths age 5 to 9 (Lower),measure
+deaths_5_9_median,Deaths age 5 to 9 (Median),measure
+deaths_5_9_upper,Deaths age 5 to 9 (Upper),measure
+mr_5_24_lower,Mortality rate age 5-24 (Lower),measure
+mr_5_24_median,Mortality rate age 5-24 (Median),measure
+mr_5_24_upper,Mortality rate age 5-24 (Upper),measure
+mr_15_24_lower,Mortality rate age 15-24 (Lower),measure
+mr_15_24_median,Mortality rate age 15-24 (Median),measure
+mr_15_24_upper,Mortality rate age 15-24 (Upper),measure
+cmr_lower,Child Mortality rate age 1-4 (Lower),measure
+cmr_median,Child Mortality rate age 1-4 (Median),measure
+cmr_upper,Child Mortality rate age 1-4 (Upper),measure
+mr_15_19_lower,Mortality rate age 15-19 (Lower),measure
+mr_15_19_median,Mortality rate age 15-19 (Median),measure
+mr_15_19_upper,Mortality rate age 15-19 (Upper),measure
+stillbirths_lower,Stillbirths (Lower),measure
+stillbirths_median,Stillbirths (Median),measure
+stillbirths_upper,Stillbirths (Upper),measure
+mr_20_24_lower,Mortality rate age 20-24 (Lower),measure
+mr_20_24_median,Mortality rate age 20-24 (Median),measure
+mr_20_24_upper,Mortality rate age 20-24 (Upper),measure
+stillbirth_rate_lower,Stillbirth rate (Lower),measure
+stillbirth_rate_median,Stillbirth rate (Median),measure
+stillbirth_rate_upper,Stillbirth rate (Upper),measure
+infant_deaths_lower,Infant deaths (Lower),measure
+infant_deaths_median,Infant deaths (Median),measure
+infant_deaths_upper,Infant deaths (Upper),measure
+mr_1_11_months_lower,Mortality rate age 1-11 months (Lower),measure
+mr_1_11_months_median,Mortality rate age 1-11 months (Median),measure
+mr_1_11_months_upper,Mortality rate age 1-11 months (Upper),measure
+u5mr_lower,Under-five mortality rate (Lower),measure
+u5mr_median,Under-five mortality rate (Median),measure
+u5mr_upper,Under-five mortality rate (Upper),measure
+mr_10_14_lower,Mortality rate age 10-14 (Lower),measure
+mr_10_14_median,Mortality rate age 10-14 (Median),measure
+mr_10_14_upper,Mortality rate age 10-14 (Upper),measure
+mr_5_14_lower,Mortality rate age 5-14 (Lower),measure
+mr_5_14_median,Mortality rate age 5-14 (Median),measure
+mr_5_14_upper,Mortality rate age 5-14 (Upper),measure
+nmr_lower,Neonatal mortality rate (Lower),measure
+nmr_median,Neonatal mortality rate (Median),measure
+nmr_upper,Neonatal mortality rate (Upper),measure
+mr_10_19_lower,Mortality rate age 10-19 (Lower),measure
+mr_10_19_median,Mortality rate age 10-19 (Median),measure
+mr_10_19_upper,Mortality rate age 10-19 (Upper),measure
+under_five_deaths_lower,Under-five deaths (Lower),measure
+under_five_deaths_median,Under-five deaths (Median),measure
+under_five_deaths_upper,Under-five deaths (Upper),measure
+mr_5_9_lower,Mortality rate age 5-9 (Lower),measure
+mr_5_9_median,Mortality rate age 5-9 (Median),measure
+mr_5_9_upper,Mortality rate age 5-9 (Upper),measure
+deaths_15_19_lower,Deaths age 15 to 19 (Lower),measure
+deaths_15_19_median,Deaths age 15 to 19 (Median),measure
+deaths_15_19_upper,Deaths age 15 to 19 (Upper),measure
+deaths_5_14_lower,Deaths age 5 to 14 (Lower),measure
+deaths_5_14_median,Deaths age 5 to 14 (Median),measure
+deaths_5_14_upper,Deaths age 5 to 14 (Upper),measure
+deaths_10_19_lower,Deaths age 10 to 19 (Lower),measure
+deaths_10_19_median,Deaths age 10 to 19 (Median),measure
+deaths_10_19_upper,Deaths age 10 to 19 (Upper),measure
+deaths_1_59_months_lower,Deaths age 1-59 months (Lower),measure
+deaths_1_59_months_median,Deaths age 1-59 months (Median),measure
+deaths_1_59_months_upper,Deaths age 1-59 months (Upper),measure
+deaths_20_24_lower,Deaths age 20 to 24 (Lower),measure
+deaths_20_24_median,Deaths age 20 to 24 (Median),measure
+deaths_20_24_upper,Deaths age 20 to 24 (Upper),measure
+deaths_5_24_lower,Deaths age 5 to 24 (Lower),measure
+deaths_5_24_median,Deaths age 5 to 24 (Median),measure
+deaths_5_24_upper,Deaths age 5 to 24 (Upper),measure
